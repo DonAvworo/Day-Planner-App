@@ -1,19 +1,24 @@
-$(document).ready(function () {
+$(document).ready(function () { 
   // listen for save button clicks
-  $('.saveBtn').on('click', function () {
+
+  // the dollar ($) sign is used to select the element that has the class of saveBtn and the click event
+  // the .on() method is used to listen for the click event on the element that has the class of saveBtn
+  // the function () is used to execute the code inside the function when the event is triggered
+  $('.saveBtn').on('click', function () { 
     // get nearby values 
-    let value = $(this).siblings('.description').val(); // get value from description input
+    let value = $(this).siblings('.description').val(); // get the description value from the form element that was clicked on
     let time = $(this).parent().attr('id'); // get time from parent element
 
     // save in localStorage through key/value pair (oop)
-    localStorage.setItem(time, value);  // set key/value pair
+    localStorage.setItem(time, value);  // set key/value pair in localStorage object (oop)
 
     // Show notification that item was saved to localStorage by adding class 'show'
-    $('.notification').addClass('show'); 
+    $('.notification').addClass('show'); // .addclass keyword adds class to the element (not the element itself)
 
     // Timeout to remove 'show' class after 20 seconds
     setTimeout(function () {
-      $('.notification').removeClass('show');
+      $('.notification').removeClass('show'); //.notification is the class of the notification and the removeclass keyword 
+                                              // removes the class from the element (not the element itself)
     }, 20000);
   });
 
@@ -22,7 +27,7 @@ $(document).ready(function () {
     let currentHour = moment().hours(); // this will be the current hour and will be used to compare to the time blocks
 
     // loop over time blocks
-    $('.time-block').each(function () {
+    $('.time-block').each(function () { // this will loop over each time block and will be used to compare to the current hour
       let blockHour = parseInt($(this).attr('id').split('-')[1]); //parseInt will convert the string to an integer
 
       // check if we've moved past this time (if blockHour is less than currentHour) where blockHour is the hour of the time block
@@ -51,47 +56,106 @@ $(document).ready(function () {
 
 
 
-  // load any saved data from localStorage
+  // saved data from localStorage will be loaded into the description input
+  if (localStorage.getItem('hour-1') !== null) { // if localStorage has a value for the key 'hour-10' ie  if the user has saved data for this time block
+    $('#hour-1 .description').val(localStorage.getItem('hour-1')); // load the value for the key 'hour-1' into the description input
+  }
+  if (localStorage.getItem('hour-2') !== null) { 
+    $('#hour-2 .description').val(localStorage.getItem('hour-2'));
+  }
+  if (localStorage.getItem('hour-3') !== null) {
+    $('#hour-3 .description').val(localStorage.getItem('hour-3'));
+  }
+  if (localStorage.getItem('hour-4') !== null) {
+    $('#hour-4 .description').val(localStorage.getItem('hour-4'));
+  }
+  if (localStorage.getItem('hour-5') !== null) {
+    $('#hour-5 .description').val(localStorage.getItem('hour-5'));
+  }
+  if (localStorage.getItem('hour-6') !== null) {
+    $('#hour-6 .description').val(localStorage.getItem('hour-6'));
+  }
+  if (localStorage.getItem('hour-7') !== null) {
+    $('#hour-7 .description').val(localStorage.getItem('hour-7'));
+  }
+  if (localStorage.getItem('hour-8') !== null) {
+    $('#hour-8 .description').val(localStorage.getItem('hour-8'));
+  }
+  if (localStorage.getItem('hour-9') !== null) {
+    $('#hour-9 .description').val(localStorage.getItem('hour-9'));
+  }
+  if (localStorage.getItem('hour-10') !== null) {
+    $('#hour-10 .description').val(localStorage.getItem('hour-10'));
+  }
+  if (localStorage.getItem('hour-11') !== null) {
+    $('#hour-11 .description').val(localStorage.getItem('hour-11'));
+  }
+  if (localStorage.getItem('hour-12') !== null) {
+    $('#hour-12 .description').val(localStorage.getItem('hour-12'));
+  }
+  if (localStorage.getItem('hour-13') !== null) {
+    $('#hour-13 .description').val(localStorage.getItem('hour-13'));
+  }
+  if (localStorage.getItem('hour-14') !== null) {
+    $('#hour-14 .description').val(localStorage.getItem('hour-14'));
+  }
+  if (localStorage.getItem('hour-15') !== null) {
+    $('#hour-15 .description').val(localStorage.getItem('hour-15'));
+  }
+  if (localStorage.getItem('hour-16') !== null) {
+    $('#hour-16 .description').val(localStorage.getItem('hour-16'));
+  }
+  if (localStorage.getItem('hour-17') !== null) {
+    $('#hour-17 .description').val(localStorage.getItem('hour-17'));
+  }
+  if (localStorage.getItem('hour-18') !== null) {
+    $('#hour-18 .description').val(localStorage.getItem('hour-18'));
+  }
+  if (localStorage.getItem('hour-19') !== null) {
+    $('#hour-19 .description').val(localStorage.getItem('hour-19'));
+  }
+  if (localStorage.getItem('hour-20') !== null) {
+    $('#hour-20 .description').val(localStorage.getItem('hour-20'));
+  }
+  if (localStorage.getItem('hour-21') !== null) {
+    $('#hour-21 .description').val(localStorage.getItem('hour-21'));
+  }
+  if (localStorage.getItem('hour-22') !== null) {
+    $('#hour-22 .description').val(localStorage.getItem('hour-22'));
+  }
+  if (localStorage.getItem('hour-23') !== null) {
+    $('#hour-23 .description').val(localStorage.getItem('hour-23'));
+  }
+  if (localStorage.getItem('hour-24') !== null) {
+    $('#hour-24 .description').val(localStorage.getItem('hour-24'));
+  }
 
-  $('#hour-9 .description').val(localStorage.getItem('hour-9'));
-  $('#hour-10 .description').val(localStorage.getItem('hour-10'));
-  $('#hour-11 .description').val(localStorage.getItem('hour-11'));
-  $('#hour-12 .description').val(localStorage.getItem('hour-12'));
-  $('#hour-13 .description').val(localStorage.getItem('hour-13'));
-  $('#hour-14 .description').val(localStorage.getItem('hour-14'));
-  $('#hour-15 .description').val(localStorage.getItem('hour-15'));
-  $('#hour-16 .description').val(localStorage.getItem('hour-16'));
-  $('#hour-17 .description').val(localStorage.getItem('hour-17'));
-
-  // display current day on page
-  $('#currentDay').text(moment().format('dddd, MMMM Do'));
-});
+  // save data to localStorage when user submits the form
+  $('#saveBtn').on('click', function(event) { // when the user clicks the save button
+    event.preventDefault(); // prevent the default action of the form from happening
+    let hour = $(this).siblings('.time-block').attr('id'); // get the id of the time block the user is saving data for
+    let description = $(this).siblings('.description').val(); // get the value of the description input
+    localStorage.setItem(hour, description); // save the value of the description input to localStorage under the key of the hour the user is saving data for
+  }
+  );
+} 
+); // end of document ready function
 
 
- // this is the code that runs when the page is loaded 
-$(document).ready(function(){ 
-  // Add smooth scrolling to all links
-  // on click, the event will prevent the default behavior of the link and will scroll to the element with the id of the href value
-  $("a").on('click', function(event) { // on click, the event will prevent the default behavior of the link 
+// display current day on page
+  $('#currentDay').text(moment().format('dddd, MMMM Do')); // display the current day on the page
 
-    // Make sure this.hash has a value before overriding default behavior
-    if (this.hash !== "") {
-      // Prevent default anchor click behavior
-      event.preventDefault();
 
-      
-      // this will store the hash value of the link that was clicked on (this.hash is the value of the href attribute of the link)
-      let hash = this.hash; 
+// display current time on page
+function currentTime() {
+  let currentTime = moment().format('HH:mm'); // get the current time
+  let currentHour = moment().format('H'); // get the current hour
+  let currentMinute = moment().format('mm'); // get the current minute
+  let currentSecond = moment().format('ss'); // get the current second
+  let currentMeridiem = moment().format('A'); // get the current meridiem
+  let currentTimeString = currentHour + ':' + currentMinute + ':' + currentSecond + ' ' + currentMeridiem; // create a string of the current time
+  $('#currentTime').text(currentTimeString); // display the current time on the page
+}
+currentTime(); // call the currentTime function
 
-      // the animate function will take the hash value and scroll to the element with the id of the hash value
-      //
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top
-      }, 800, function(){
-   
-        // Add hash (#) to URL when done scrolling (default click behavior)
-        window.location.hash = hash;
-      });
-    } // End if
-  });
-});
+//change color 
