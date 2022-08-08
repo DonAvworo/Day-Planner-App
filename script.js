@@ -22,19 +22,19 @@ $(document).ready(function () {
     }, 20000);
   });
 
-  function hourUpdater() {
+  function updateTime() {
     // get current number of hours
-    let currentHour = moment().hours(); // this will be the current hour and will be used to compare to the time blocks
+    let currentTime = moment().hours(); // this will be the current hour and will be used to compare to the time blocks
 
     // loop over time blocks
     $('.time-block').each(function () { // this will loop over each time block and will be used to compare to the current hour
-      let blockHour = parseInt($(this).attr('id').split('-')[1]); //parseInt will convert the string to an integer
-
+      let timeBlock = parseInt($(this).attr('id').split('-')[1]); //parseInt will convert the string to an integer split will split...
+                                                                  //...the string at the - and take the second element and convert it to an integer
       // check if we've moved past this time (if blockHour is less than currentHour) where blockHour is the hour of the time block
-      if (blockHour < currentHour) {
-        $(this).addClass('past'); // adds the class 'past' to time block if it is past the current hour (past = past hour)
-      } else if (blockHour === currentHour) {
-        $(this).removeClass('past'); // removes the class 'past' from time block if it is the current hour (present = current hour)
+      if (timeBlock < currentTime) { // if timeBlock is less than currentTime
+        $(this).addClass('past'); // adds the class 'past' (changes the color of the time block using the css class 'past')
+      } else if (timeBlock === currentTime) { // if timeBlock is equal to currentTime
+        $(this).removeClass('past'); // removes the class 'past' from time block if it is the current hour (present = current hour(color))
         $(this).addClass('present'); // adds the class 'present' to time block if it is the current hour (present = current hour)
       } else {
         $(this).removeClass('past'); // this removes the class 'past' from time block if it is in the future (future = future hour) 
@@ -44,21 +44,14 @@ $(document).ready(function () {
     });
   }
 
-  hourUpdater(); // this will run the hourUpdater function
+  updateTime(); // this will run the hourUpdater function
 
   // set up interval to check if current time needs to be updated
-  let interval = setInterval(hourUpdater, 15000);
-
-  if (localStorage.getItem('hour-9') !== null) {  // if localStorage has a value for the key 'hour-9' ie  if the user has saved data for this time block  
-    $('#hour-9 .description').val(localStorage.getItem('hour-9'));
-  }
-  
-
-
+  let interval = setInterval(updateTime, 15000);
 
   // saved data from localStorage will be loaded into the description input
-  if (localStorage.getItem('hour-1') !== null) { // if localStorage has a value for the key 'hour-10' ie  if the user has saved data for this time block
-    $('#hour-1 .description').val(localStorage.getItem('hour-1')); // load the value for the key 'hour-1' into the description input
+  if (localStorage.getItem('hour-1') !== null) { // if localStorage has a value for the key 'hour-10' ie  if the user has saved data for this time block...
+    $('#hour-1 .description').val(localStorage.getItem('hour-1')); // ...load the value for the key 'hour-1' into the description input
   }
   if (localStorage.getItem('hour-2') !== null) { 
     $('#hour-2 .description').val(localStorage.getItem('hour-2'));
@@ -143,19 +136,4 @@ $(document).ready(function () {
 
 
 // display current day on page
-  $('#currentDay').text(moment().format('dddd, MMMM Do')); // display the current day on the page
-
-
-// display current time on page
-function currentTime() {
-  let currentTime = moment().format('HH:mm'); // get the current time
-  let currentHour = moment().format('H'); // get the current hour
-  let currentMinute = moment().format('mm'); // get the current minute
-  let currentSecond = moment().format('ss'); // get the current second
-  let currentMeridiem = moment().format('A'); // get the current meridiem
-  let currentTimeString = currentHour + ':' + currentMinute + ':' + currentSecond + ' ' + currentMeridiem; // create a string of the current time
-  $('#currentTime').text(currentTimeString); // display the current time on the page
-}
-currentTime(); // call the currentTime function
-
-//change color 
+$('#currentDay').text(moment().format('dddd, MMMM Do')); // this will display the current day on the page
