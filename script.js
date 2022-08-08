@@ -23,7 +23,7 @@ $(document).ready(function () {
   });
 
   function updateTime() {
-    // get current number of hours
+    // get the current time
     let currentTime = moment().hours(); // this will be the current hour and will be used to compare to the time blocks
 
     // loop over time blocks
@@ -125,7 +125,7 @@ $(document).ready(function () {
 
   // save data to localStorage when user submits the form
   $('#saveBtn').on('click', function(event) { // when the user clicks the save button
-    event.preventDefault(); // prevent the default action of the form from happening
+    event.preventDefault(); // prevent the default action of the form from happening (ie submit)
     let hour = $(this).siblings('.time-block').attr('id'); // get the id of the time block the user is saving data for
     let description = $(this).siblings('.description').val(); // get the value of the description input
     localStorage.setItem(hour, description); // save the value of the description input to localStorage under the key of the hour the user is saving data for
